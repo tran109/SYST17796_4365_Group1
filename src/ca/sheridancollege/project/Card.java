@@ -2,6 +2,7 @@
  * SYST 17796 Project Winter 2020 Base code.
  * Students can modify and extend to implement their game.
  * Add your name as a modifier and the date!
+ * Group 1 February 01 2020
  */
 package ca.sheridancollege.project;
 
