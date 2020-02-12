@@ -12,6 +12,7 @@ package ca.sheridancollege.project;
  *
  * @author dancye
  */
+// Testing comment
 public abstract class Card {
     //default modifier for child classes
 
