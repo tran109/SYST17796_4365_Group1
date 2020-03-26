@@ -55,10 +55,13 @@ public class Dealer {
         }
         
     }
-    public void declareWinner(){
+    
+    public int countCurrentPlayers(ArrayList<Player> players){
+        return 1;
+    }
+    public void declareWinner(ArrayList<Player> players){
         
     }
-    
-
-        
+    //Dealer class doesnt need a toString() because it doesnt have any properties
+      
 }

@@ -8,7 +8,7 @@ package gofish;
 import java.util.ArrayList;
 
 //Aggregating class --> This class is made up of a Dealer, DeckOfCards, and Players
-public abstract class Go_Fish {
+public class Go_Fish {
 
     /*For our application we established an few type relationships but the core 
     relationship we estabished is an aggregation relationship between classes for 
@@ -50,6 +50,19 @@ public abstract class Go_Fish {
         return gameName;
     }
 
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public Dealer getDealer() {
+        return dealer;
+    }
+
+    public DeckOfCards getDeckOfCards() {
+        return deckOfCards;
+    }
+    
+
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
@@ -60,5 +73,10 @@ public abstract class Go_Fish {
 
     public void setDeckOfCards(DeckOfCards deckOfCards) {
         this.deckOfCards = deckOfCards;
+    }
+    
+    //Print out each object and its propertys a
+    public String toString(){
+        return String.format("");
     }
 }
