@@ -1,7 +1,7 @@
 /**
  * Group 1 February 01 2020
  */
-package gofish;
+package model;
 
 /**
  *

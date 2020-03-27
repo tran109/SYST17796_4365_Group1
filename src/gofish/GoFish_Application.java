@@ -10,6 +10,8 @@
 
 package gofish;
 
+import model.GoFish;
+
 /**
  *
  * @author nathan
@@ -21,7 +23,7 @@ public class GoFish_Application {
      */
     public static void main(String[] args) {
         
-        Go_Fish game = new Go_Fish();
+        GoFish game = new GoFish();
         
        
         
