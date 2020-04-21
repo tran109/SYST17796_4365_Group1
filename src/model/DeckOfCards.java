@@ -1,30 +1,33 @@
-/**
- * SYST 17796 Project Winter 2020 Base code.
- * Students can modify and extend to implement their game.
- * Add your name as a modifier and the date!
+/*
+ * [DeckOfCards]
+ *
+ * Description:
+ * This class models a standard deck of cards, that can range from 0 
+ * to any sized deck. In the porgram case the deck will contain 52 cards
  */
 package model;
 
 import model.Card;
 import java.util.ArrayList;
 
-
+/**
+ * @author Si Tran
+ * @author Nathan Morrone
+ * @author Sugi Oh
+ * @author Inho Choi
+ */
 //Aggregated class --> This class is part of Go-Fish
-//Asscoation with the Card, the "DeckOfCards" depends on the card class. The DeckOfCards has a 1:any reltionship between the Card class.
 public class DeckOfCards {
 
     
-    /*With the card class being exetsnible because of its enum properties, it
-    allows the deck of cards to have a card count based on how many "Suit" enums and "Rank" enums
-    are defined in the enum classes. Having an arrayList of "Card" 
-    obejcts doesnt limit the size of the card deck and can be manipulated to the 
-    needs of the program through the pre defiend user friendly 
-    methods used on arrayList type references. */
-   
-    ArrayList<Card> cards = new ArrayList<Card>();
+    /* Having an arrayList of "Card" obejcts doesnt limit the size of
+    the card deck and can be manipulated to the needs of the program through 
+    the pre defiend user friendly methods used on arrayList type references.
+    This will make the code more extensible*/
+  
+    private ArrayList<Card> cards = new ArrayList<Card>();
 
-
-   
+    //This no-arg constructor will initalize the deck of cards with 52 cards
     public DeckOfCards() {
         
         
@@ -36,17 +39,20 @@ public class DeckOfCards {
         
     }
 
+    //This method will return the cards within the deck of cards
     public ArrayList<Card> getCards() {
         return cards;
     }
 
-    //This method is extra we do not need it, this makes the class more cohesive.
+
+    //This method will set the cards within the deck of cards
     public void setCards(ArrayList<Card> cards) {
         this.cards = cards;
     }
   
+    //This method will return number amount of cards within the deck of cards
     public int size() {
         return cards.size();
     }
-
+    
 }

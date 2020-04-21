@@ -1,20 +1,19 @@
 /*
- * [Class name]
- * Author: [the name of the person who created the class. It might be different from yours]
- * Date: [date]
+ * [Suit]
  *
  * Description:
- * [Description about the class]
+ * This enum class models the suit of a single card within a standard card deck
+ * of 52 cards
  */
 package model;
 
 /**
  *
- * @author nathan
+ * @author Si Tran
  */
 public enum Suit {
-    ACE,
-    JACK,
-    QUEEN,
-    KING;
+    HEARTS,
+    SPADES,
+    DIAMONDS,
+    CLUBS;
 }

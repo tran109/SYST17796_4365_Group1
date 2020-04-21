@@ -1,64 +1,177 @@
 /*
- * [Class name]
- * Author: [the name of the person who created the class. It might be different from yours]
- * Date: [date]
+ * [Dealer]
  *
- * Description
- * [Description about the class]
+ * Description:
+ * This class models a dealer of the game go_fish 
  */
 package model;
 
-import model.Card;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
+ * @author Sugi Oh
+ * @author Inho Choi
+ * @author Nathan Morrone
+ * @author Si Tran
  *
- * @author nathan
+ *
  */
 //Aggregated class
 public class Dealer {
 
-    //association --> not a direct association but the dealer will shuffle the deck of cards then distrubte cards to palyers
-    //This class is delegated the responsiblity of delcaring the game winner of "GoFish"
-    public Dealer() {
+    private static Dealer dealer = null;
+
+    //Simpleton pattern reference return method
+    public static Dealer getInstance() {
+        if (dealer == null) {
+            dealer = new Dealer();
+        }
+        return dealer;
     }
 
+    //This method is used to distrubte cards to the players of the game
     public ArrayList<Card> distributeCards(DeckOfCards deckOfCards) {
-        shuffle(deckOfCards);
 
         ArrayList<Card> temp = new ArrayList<Card>();
 
-        //Each player is allowed 7 cards to start off with
-        for (int i = 0; i < 7; i++) {
-            temp.add(deckOfCards.getCards().remove(i)); //.remove, removes a card one by one from the "deckOfCards"
-        }
+        temp.addAll(deckOfCards.getCards().subList(0, 7));
+        deckOfCards.getCards().removeAll(temp);
 
         return temp;
 
     }
 
-    //Count the deck after each time a player takes cards from the deck of cards.
+    //This method will count the deck after each player has a turn.
     public boolean isDeckEmpty(DeckOfCards deckOfCards) {
-        if (deckOfCards.size() == 0) {
+        if (deckOfCards.getCards().isEmpty()) {
             return true;
         } else {
             return false;
         }
 
     }
-    //Shuffles the deck of cards in random order, this method takes an ArrayList of "Card" type objects
 
+    //This method shuffles the deck of cards in random order
     public void shuffle(DeckOfCards deckOfCards) {
         Collections.shuffle(deckOfCards.getCards());
 
     }
 
-    //This method will return the data of the winner in a string and we will place it inside the GoFish classes toString()
-    public String declareWinner(ArrayList<Player> players) {
+    /*This method will return the winner based on which player has 
+    the highest number of SETS, a single set is 4 cards that share the 
+    same rank*/
+    public String declareWinner(Player player1, Player player2) {
 
-        return "";
+        int player1pile = getCardPiles(player1);
+        int player2pile = getCardPiles(player2);
+
+        if (player1pile == player2pile) {
+            return "NO WINNER DRAW\n";
+
+        } else if (player1pile > player2pile) {
+            return player1.getName();
+        } else {
+            return player2.getName();
+        }
     }
-    //Dealer class doesnt need a toString() because it doesnt have any properties
+
+    /*This is a helper method for the "declareWinner()" method*/
+    private int getCardPiles(Player player) {
+        int rankOne = 0;
+        int rankTwo = 0;
+        int rankThree = 0;
+        int rankFour = 0;
+        int rankFive = 0;
+        int rankSix = 0;
+        int rankSeven = 0;
+        int rankEight = 0;
+        int rankNine = 0;
+        int rankTen = 0;
+        int rankJack = 0;
+        int rankQueen = 0;
+        int rankKing = 0;
+
+        /*this variable "numOfSets" will represent the number of sets
+        (4 cards with the same rank is a set)*/
+        int numOfSets = 0;
+        for (Card currentCard : player.getCurrentCards()) {
+
+            switch (currentCard.getRank().name()) {
+
+                case "ONE":
+                    ++rankOne;
+                    break;
+                case "TWO":
+                    ++rankTwo;
+                    break;
+                case "THREE":
+                    ++rankThree;
+                    break;
+                case "FOUR":
+                    ++rankFour;
+                    break;
+                case "FIVE":
+                    ++rankFive;
+                    break;
+                case "SIX":
+                    ++rankSix;
+                    break;
+                case "SEVEN":
+                    ++rankSeven;
+                    break;
+                case "EIGHT":
+                    ++rankEight;
+                    break;
+                case "NINE":
+                    ++rankNine;
+                    break;
+                case "TEN":
+                    ++rankTen;
+                    break;
+                case "JACK":
+                    ++rankJack;
+                    break;
+                case "QUEEN":
+                    ++rankQueen;
+                    break;
+                case "KING":
+                    ++rankKing;
+                    break;
+
+            }
+        }
+
+        if (rankOne == 4) {
+            numOfSets++;
+        } else if (rankTwo == 4) {
+            numOfSets++;
+        } else if (rankThree == 4) {
+            numOfSets++;
+        } else if (rankFour == 4) {
+            numOfSets++;
+        } else if (rankFive == 4) {
+            numOfSets++;
+        } else if (rankSix == 4) {
+            numOfSets++;
+        } else if (rankSeven == 4) {
+            numOfSets++;
+        } else if (rankEight == 4) {
+            numOfSets++;
+        } else if (rankNine == 4) {
+            numOfSets++;
+        } else if (rankTen == 4) {
+            numOfSets++;
+        } else if (rankJack == 4) {
+            numOfSets++;
+        } else if (rankQueen == 4) {
+            numOfSets++;
+        } else if (rankKing == 4) {
+            numOfSets++;
+        }
+
+        return numOfSets;
+
+    }
 
 }

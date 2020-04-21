@@ -1,66 +1,78 @@
-/**
- * SYST 17796 Project Winter 2020 Base code.
- * Students can modify and extend to implement their game.
- * Add your name as a modifier and the date!
+/*
+ * [GoFish]
+ *
+ * Description:
+ * This class is an aggregating class that is made up of aggregated objects
+ * , that include a list of players, a dealer, and a deck of cards. This class
+ * models a game of go fish
  */
 package model;
 
-import model.DeckOfCards;
-import model.Dealer;
 import java.util.ArrayList;
 
-//Aggregating class --> This class is made up of a Dealer, DeckOfCards, and Players
+/**
+ *
+ * @author Inho Choi
+ * @author Sugi Oh
+ * @author Nathan Morrone
+ * @author Si Tran
+ */
+/*Aggregating class --> This class is made up of a Dealer, DeckOfCards, 
+and Players*/
 public class GoFish {
 
-
-    private final String gameName;//the title of the game
-    ArrayList<Player> players;//Aggregated class -> the Go-Fish game needs players to work, so the players are part of the game. Players can exist in other games so its an aggregation
-    Dealer dealer; //Aggregated class --> the Go-Fish game needs a dealer for it work, so the dealer in part of the game even though it could be an association. remember that aggregation is a form of association.
-    DeckOfCards deckOfCards; //Aggregated class --> the Go-Fish game needs a deck of cards but the deck of cards can exist without the game Go-Fish existing
+    private String gameName;//the title of the game
+    private ArrayList<Player> players;//Aggregated class 
+    private Dealer dealer; //Aggregated class 
+    private DeckOfCards deckOfCards; //Aggregated class 
 
     public GoFish() {
         this.gameName = "Go Fish";
         //Aggregated classes/objects
         players = new ArrayList<Player>();
-        dealer = new Dealer();
+        dealer = Dealer.getInstance();
         deckOfCards = new DeckOfCards();
 
     }
 
+    //This method is used ot return the game name
     public String getGameName() {
         return gameName;
     }
 
+    //This method is used to set the game name
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
+    }
+
+    //This method is used to return the players within the game
     public ArrayList<Player> getPlayers() {
         return players;
     }
 
-    public Dealer getDealer() {
-        return dealer;
-    }
-
-    public DeckOfCards getDeckOfCards() {
-        return deckOfCards;
-    }
-
+    //This method is used to set the players within the game
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 
+    //This method is used to return the dealer within the game
+    public Dealer getDealer() {
+        return dealer;
+    }
+
+    //This method is used to set the dealer within the game
     public void setDealer(Dealer dealer) {
         this.dealer = dealer;
     }
 
+    //This method is used to return the deck of cards within the game
+    public DeckOfCards getDeckOfCards() {
+        return deckOfCards;
+    }
+
+    //This method is used to set the deck of cards within the game
     public void setDeckOfCards(DeckOfCards deckOfCards) {
         this.deckOfCards = deckOfCards;
     }
 
-    public int getNumberOfPlayers(ArrayList<Player> players) {
-        return 1;
-    }
-    
-    //Print out each object and its propertys and delcare the winner using the dealer class
-    public String toString() {
-        return String.format("");
-    }
 }

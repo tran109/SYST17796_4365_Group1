@@ -1,132 +1,150 @@
-/**
- * SYST 17796 Project Winter 2020 Base code.
- * Students can modify and extend to implement their game.
- * Add your name as a modifier and the date!
+/*
+ * [Player]
+ *
+ * Description:
+ * thsi class models a player of the game go_fish
  */
 package model;
 
-
 import java.util.ArrayList;
 
-//Aggregated class
-public abstract class Player {
+/**
+ * 
+ * @author Sugi Oh
+ * @author Si Tran
+ * @author Inho Choi
+ * @author Nathan Morrone
+ */
+ //Player associates with the dealer , other players, and the deck of cards
+public class Player {
 
-    //player associates with the dealer and other players
-    private ArrayList<Card> currentCards = new ArrayList<Card>();
-    private String name; //the unique name for this player
-    private int id; //the unique number for each player
-    private double score; // the score for each player 
+  
+    private ArrayList<Card> currentCards;
+    private String name;
+    private int id; 
+    private double score; 
 
+    //No-arg cosntructor
     public Player() {
     }
 
-    
+    //Constructor with arguments
     public Player(String name, ArrayList<Card> currentCards) {
         this.name = name;
         this.currentCards = currentCards;
     }
 
-    //GETTERS
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+ 
+    //This method will return the id of the player
     public int getId() {
         return id;
     }
 
+    //This method will set the id of the player
     public void setId(int id) {
         this.id = id;
     }
 
+    //This method will return the name of the player
+    public String getName() {
+        return name;
+    }
+
+    //This method will set the name of the player
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    //This method will return the score of the player
     public double getScore() {
         return score;
     }
 
+    //This method will set the score of the player
     public void setScore(double score) {
         this.score = score;
     }
 
+    //This method will return the current cards the player contains
     public ArrayList<Card> getCurrentCards() {
         return currentCards;
     }
 
-    //SETTERS
-    //This method receieves cards from the dealers method "distribute crad"
+    //This method will set the current cards the player contains
     public void setCurrentCards(ArrayList<Card> cardsFromDealer) {
         this.currentCards = cardsFromDealer;
     }
 
-    //OTHER
-    //The player interacts witht eh "DeckOfCards" and removes 4 cards from the curretn obejct, and the palyer adds the cards to their currentCards
-    public void goFish(DeckOfCards deckOfcards) {
-        //Defined two serperate variables because the variable names are key in geards to describing but the theri values represent. I didnt add them as properties in the class because it doesnt make sense
-        int goFishCardLimit = 4;
-        int cardsLeftInDeck = 4; //When the deck has 4 cards left to make sure the user doesnt take more than needed from the deck or else we will get an Array Index out of boudns
-        //If the deck of cards has less than 4 cards left remove the remainder cards and add to current card hand
-        if (deckOfcards.size() < cardsLeftInDeck) {
-            for (int i = 0; i < deckOfcards.size(); i++) {
-                this.currentCards.add(deckOfcards.getCards().remove(i));
-            }
-        } else {
-            //Each player will ADD 4 cards  after the go fish to their CURRENT currentCards so we are manipulating the current card hand of the player and adding cards to it
-            for (int i = 0; i < goFishCardLimit; i++) {
-                this.currentCards.add(deckOfcards.getCards().remove(i)); //.remove, removes object references and assigns them to the arraylist reference temp
+  
+    /*This method is used to retrieve the opposing players cards if the cards
+    match the same rank requested by the asking player*/
+    public void getOpposingPlayerCards(Player player1, Player player2,
+            Rank rank, ArrayList<Card> list) {
+        for (int i = 0; i < player2.getCurrentCards().size(); i++) {
+            if (player2.getCurrentCards().get(i).getRank().equals(rank)) {
+
+                list.add(player2.getCurrentCards().get(i));
+                player1.getCurrentCards().add(new Card(rank));
 
             }
+
         }
+
     }
 
-    //Player checks if he still has cards after he gives away cards away to opposing player, if player doesnt have cards left, the dealer will declare the opposing player the winner
+    /*This method is used to check if the opposing player has cards left over 
+    after the asking player has or has not recieved cards from the opposing
+    player*/
     public boolean hasCardsLeftOver() {
-        if (currentCards.size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return !(currentCards.isEmpty());
 
     }
 
-    //Helper method, may make it private idk yet. may use this method ot determine an aternate path if the player doesnt have the card
-    public boolean hasCardsInCurrentHand(Card card) {
+  
+    /*This method is used to check if the current player has cards in their
+    hand based on a rank*/
+    public boolean hasCardsInCurrentHand(Rank rank) {
         boolean value = false;
         for (int i = 0; i < currentCards.size(); i++) {
-            if (currentCards.get(i).equals(card)) {
+            if (currentCards.get(i).getRank().equals(rank)) {
                 value = true;
                 break;
             } else {
                 value = false;
             }
         }
-        return false;
+        return value;
     }
 
-    public ArrayList<Card> giveCardsTooOtherPlayer(Card card) {
-        ArrayList<Card> temp = new ArrayList<Card>();
 
-        for (int i = 0; i < currentCards.size(); i++) {
-            if (hasCardsInCurrentHand(card)) {
-                temp.add(currentCards.remove(i));
+    //This method is used when the player must "go fish"
+    public boolean goFish(DeckOfCards deckOfcards) {
 
-            }
+        boolean value = false;
+        if (!deckOfcards.getCards().isEmpty()) {
+
+            this.currentCards.add(deckOfcards.getCards().remove(0));
+
+            value = true;
         }
+        return value;
 
-        return temp;
     }
 
-    //Method for recieving cards
-    public void getOtherPlayersCards(ArrayList<Card> cards) {
-        for (int i = 0; i < currentCards.size(); i++) {
-            currentCards.add(cards.get(i));
-        }
-    }
-
+    /*This method returns a srtrign representation of the players name 
+    and the current cards within their hand based on a rank*/
     @Override
     public String toString() {
-        return String.format("");
+
+        int num = 1;
+        String output = String.format("Player Name: %s%n%nCurrent "
+                + "Card Ranks:%n", getName());
+        for (Card x : currentCards) {
+            output += String.format("%d. %s%n", num, x.getRank().name());
+            num++;
+
+        }
+        return output;
     }
 }
