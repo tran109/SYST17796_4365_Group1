@@ -26,7 +26,6 @@ public class DealerTest {
         ArrayList<Card> expResult = null;
         ArrayList<Card> result = instance.distributeCards(deckOfCards);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
@@ -37,7 +36,6 @@ public class DealerTest {
         boolean expResult = false;
         boolean result = instance.isDeckEmpty(deckOfCards);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
@@ -46,7 +44,6 @@ public class DealerTest {
         DeckOfCards deckOfCards = null;
         Dealer instance = new Dealer();
         instance.shuffle(deckOfCards);
-        fail("The test case is a prototype.");
     }
 
     @Test
@@ -57,7 +54,6 @@ public class DealerTest {
         String expResult = "";
         String result = instance.declareWinner(players);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
     
 }
